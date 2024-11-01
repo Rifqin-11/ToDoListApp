@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 
 function TaskDetails({ task, onSave, onDelete }) {
   const [editedTask, setEditedTask] = useState(task);
-  const [isListClicked, setIsListClicked] = useState(false); 
 
   useEffect(() => {
     setEditedTask(task);
@@ -46,10 +45,9 @@ function TaskDetails({ task, onSave, onDelete }) {
           name="list"
           value={editedTask.list || ''}
           onChange={handleChange}
-          onClick={() => setIsListClicked(true)} 
           className="w-full mb-2 p-2 border border-gray-300 bg-gray-100 rounded"
         >
-          {!isListClicked && <option value="">Select List</option>}
+          <option value="">Select List</option>
           <option value="Personal">Personal</option>
           <option value="Work">Work</option>
           <option value="List 1">List 1</option>

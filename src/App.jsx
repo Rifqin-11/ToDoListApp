@@ -4,21 +4,26 @@ import TaskList from './pages/TaskList';
 import TaskDetails from './components/TaskDetails';
 import NewTaskModal from './components/NewTaskModal';
 import ComingSoon from './pages/ComingSoon';
-import Sidebar from './components/sidebar';
+import Sidebar from './components/Sidebar';
+
 
 function App() {
   const [tasks, setTasks] = useState([
-    { id: 1, title: "Web Development Assignment", description: "Create a website using React", tags: ["Work"], date: "1-11-24", completed: false },
-    { id: 2, title: "Renew driver's license", description: "", tags: ["Personal"], date: "11-03-25", completed: false },
-    { id: 3, title: "Apple Music Subscription", description: "", tags: ["Personal"], date: "22-03-24", completed: false }
+    { id: 1, title: "Web Development Assignment", description: "Create a website using React", tags: ["Tag 1"], date: "1-11-24", completed: false, list: "Personal"},
+    { id: 2, title: "Renew driver's license", description: "", tags: ["Tag 1"], date: "11-03-25", completed: false, list: "Personal" },
+    { id: 3, title: "Apple Music Subscription", description: "", tags: ["Tag 2"], date: "22-03-24", completed: false, list: "work" }
   ]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSave = (updatedTask) => {
-    setTasks(prevTasks => prevTasks.map(task => task.id === updatedTask.id ? updatedTask : task));
-    setSelectedTask(null);
-  };
+  setTasks((prevTasks) =>
+    prevTasks.map((task) =>
+      task.id === updatedTask.id ? updatedTask : task
+    )
+  );
+  setSelectedTask(null); // Menyembunyikan TaskDetails setelah disimpan
+};
 
   const handleDelete = (taskId) => {
     setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));

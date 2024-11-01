@@ -28,7 +28,7 @@ function TaskItem({ task, onSelect, onToggleComplete }) {
           </div>
         </div>
       </div>
-      <span className="text-sm font-semibold text-red-500">{task.tags[0]}</span>
+      <span className="text-sm font-semibold text-red-500">{task.list}</span>
     </li>
   );
 }
