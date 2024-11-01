@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import { HashRouter as Router, Routes, Route } from 'react-router-dom';
 import TaskList from './pages/TaskList';
 import TaskDetails from './components/TaskDetails';
 import NewTaskModal from './components/NewTaskModal';

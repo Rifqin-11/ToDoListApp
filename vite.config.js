@@ -1,8 +1,7 @@
 import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
-// https://vitejs.dev/config/
 export default defineConfig({
   plugins: [react()],
-  base: '/ToDoListApp/', // Add your repo name here
+  base: '/ToDoListApp/', // Replace 'ToDoListApp' with your actual repository name
 });
