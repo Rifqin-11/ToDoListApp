@@ -8,9 +8,9 @@ import Sidebar from './components/sidebar';
 
 function App() {
   const [tasks, setTasks] = useState([
-    { id: 1, title: "Web Development Assignment", description: "Create a website using React", tags: ["Work"], date: "1-11-24" },
-    { id: 2, title: "Renew driver's license", description: "", tags: ["Personal"], date: "11-03-25" },
-    { id: 3, title: "Apple Music Subscription", description: "", tags: ["Personal"], date: "22-03-24" }
+    { id: 1, title: "Web Development Assignment", description: "Create a website using React", tags: ["Work"], date: "1-11-24", completed: false },
+    { id: 2, title: "Renew driver's license", description: "", tags: ["Personal"], date: "11-03-25", completed: false },
+    { id: 3, title: "Apple Music Subscription", description: "", tags: ["Personal"], date: "22-03-24", completed: false }
   ]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -26,7 +26,15 @@ function App() {
   };
 
   const handleAddTask = (newTask) => {
-    setTasks([...tasks, { ...newTask, id: Date.now() }]);
+    setTasks([...tasks, { ...newTask, id: Date.now(), completed: false }]);
+  };
+
+  const handleToggleComplete = (taskId) => {
+    setTasks(prevTasks => 
+      prevTasks.map(task =>
+        task.id === taskId ? { ...task, completed: !task.completed } : task
+      )
+    );
   };
 
   return (
@@ -41,6 +49,7 @@ function App() {
                 tasks={tasks}
                 onTaskSelect={setSelectedTask}
                 onOpenModal={() => setIsModalOpen(true)}
+                onToggleComplete={handleToggleComplete}
               />
             }
           />
