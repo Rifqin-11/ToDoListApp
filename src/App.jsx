@@ -1,17 +1,20 @@
 import React, { useState } from 'react';
 import { HashRouter as Router, Routes, Route } from 'react-router-dom';
-import TaskList from './pages/TaskList';
+import TaskList from './pages/Today';
 import TaskDetails from './components/TaskDetails';
 import NewTaskModal from './components/NewTaskModal';
 import ComingSoon from './pages/ComingSoon';
 import Sidebar from './components/Sidebar';
+import Calendar from './pages/Calendar';
+import Upcoming from './pages/Upcoming';
+
 
 
 function App() {
   const [tasks, setTasks] = useState([
-    { id: 1, title: "Web Development Assignment", description: "Create a website using React", tags: ["Tag 1"], date: "1-11-24", completed: false, list: "Personal"},
-    { id: 2, title: "Renew driver's license", description: "", tags: ["Tag 1"], date: "11-03-25", completed: false, list: "Personal" },
-    { id: 3, title: "Apple Music Subscription", description: "", tags: ["Tag 2"], date: "22-03-24", completed: false, list: "work" }
+    { id: 1, title: "Web Development Assignment", description: "Create a website using React", tags: ["Tag 1"], date: "6-11-24", completed: false, list: "Personal"},
+    { id: 2, title: "Renew driver's license", description: "", tags: ["Tag 1"], date: "11-03-24", completed: false, list: "Personal" },
+    { id: 3, title: "Apple Music Subscription", description: "", tags: ["Tag 2"], date: "11-08-24", completed: false, list: "work" }
   ]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -58,8 +61,29 @@ function App() {
               />
             }
           />
-          <Route path="/upcoming" element={<ComingSoon />} />
-          <Route path="/calendar" element={<ComingSoon />} />
+          <Route
+            path="/upcoming"
+            element={
+              <Upcoming
+                tasks={tasks}
+                onTaskSelect={setSelectedTask}
+                onOpenModal={() => setIsModalOpen(true)}
+                onToggleComplete={handleToggleComplete}
+              />
+            }
+          />
+          <Route
+            path="/calendar"
+            element={
+              <Calendar 
+                tasks={tasks}
+                onTaskSelect={setSelectedTask}
+                onOpenModal={() => setIsModalOpen(true)}
+                onToggleComplete={handleToggleComplete}
+                onAddTask={handleAddTask} // Tambahkan fungsi ini sebagai prop
+              />
+            }
+          />
           <Route path="/sticky-wall" element={<ComingSoon />} />
           <Route path="/Personal" element={<ComingSoon />} />
           <Route path="/Work" element={<ComingSoon />} />
