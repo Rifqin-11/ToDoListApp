@@ -1,6 +1,15 @@
 import React from 'react';
 
-function TaskItem({ task, onSelect, onToggleComplete }) {
+function TaskItem({ task, onSelect, onToggleComplete, onSave }) {
+  const handleCheckboxChange = (e) => {
+    e.stopPropagation();
+    onToggleComplete(task.id);
+    onSave({ ...task, completed: !task.completed });
+  };
+  const handleSave = () => {
+    onSave(editedTask);
+  };
+
   return (
     <li
       className="p-4 bg-white rounded shadow-md cursor-pointer flex items-center justify-between hover:bg-gray-200"
@@ -10,10 +19,7 @@ function TaskItem({ task, onSelect, onToggleComplete }) {
         <input
           type="checkbox"
           checked={task.completed}
-          onChange={(e) => {
-            e.stopPropagation();
-            onToggleComplete(task.id);
-          }}
+          onChange={handleCheckboxChange}
           className="form-checkbox h-5 w-5 text-blue-600"
         />
         <div>

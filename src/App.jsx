@@ -8,25 +8,23 @@ import Sidebar from './components/Sidebar';
 import Calendar from './pages/Calendar';
 import Upcoming from './pages/Upcoming';
 
-
-
 function App() {
   const [tasks, setTasks] = useState([
-    { id: 1, title: "Web Development Assignment", description: "Create a website using React", tags: ["Tag 1"], date: "6-11-24", completed: false, list: "Personal"},
+    { id: 1, title: "Web Development Assignment", description: "Create a website using React", tags: ["Tag 1"], date: "11-03-24", completed: false, list: "Personal"},
     { id: 2, title: "Renew driver's license", description: "", tags: ["Tag 1"], date: "11-03-24", completed: false, list: "Personal" },
-    { id: 3, title: "Apple Music Subscription", description: "", tags: ["Tag 2"], date: "11-08-24", completed: false, list: "work" }
+    { id: 3, title: "Apple Music Subscription", description: "", tags: ["Tag 2"], date: "11-08-24", completed: false, list: "Work" }
   ]);
   const [selectedTask, setSelectedTask] = useState(null);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleSave = (updatedTask) => {
-  setTasks((prevTasks) =>
-    prevTasks.map((task) =>
-      task.id === updatedTask.id ? updatedTask : task
-    )
-  );
-  setSelectedTask(null); // Menyembunyikan TaskDetails setelah disimpan
-};
+    setTasks((prevTasks) =>
+      prevTasks.map((task) =>
+        task.id === updatedTask.id ? updatedTask : task
+      )
+    );
+    setSelectedTask(null); // Menyembunyikan TaskDetails setelah disimpan
+  };
 
   const handleDelete = (taskId) => {
     setTasks(prevTasks => prevTasks.filter(task => task.id !== taskId));
@@ -58,6 +56,7 @@ function App() {
                 onTaskSelect={setSelectedTask}
                 onOpenModal={() => setIsModalOpen(true)}
                 onToggleComplete={handleToggleComplete}
+                onSave={handleSave}
               />
             }
           />
@@ -67,8 +66,8 @@ function App() {
               <Upcoming
                 tasks={tasks}
                 onTaskSelect={setSelectedTask}
-                onOpenModal={() => setIsModalOpen(true)}
                 onToggleComplete={handleToggleComplete}
+                onSave={handleSave}
               />
             }
           />
@@ -85,11 +84,6 @@ function App() {
             }
           />
           <Route path="/sticky-wall" element={<ComingSoon />} />
-          <Route path="/Personal" element={<ComingSoon />} />
-          <Route path="/Work" element={<ComingSoon />} />
-          <Route path="/List-1" element={<ComingSoon />} />
-          <Route path="/settings" element={<ComingSoon />} />
-          <Route path="/sign-out" element={<ComingSoon />} />
         </Routes>
         {selectedTask && (
           <TaskDetails

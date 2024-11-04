@@ -8,7 +8,11 @@ function TaskDetails({ task, onSave, onDelete }) {
   }, [task]);
 
   const handleChange = (e) => {
-    setEditedTask({ ...editedTask, [e.target.name]: e.target.value });
+    const { name, value, type, checked } = e.target;
+    setEditedTask({
+      ...editedTask,
+      [name]: type === 'checkbox' ? checked : value
+    });
   };
 
   const handleSave = () => {
@@ -72,6 +76,18 @@ function TaskDetails({ task, onSave, onDelete }) {
           <span key={index} className="bg-gray-300 px-2 py-1 rounded mb-1">{tag}</span>
         ))}
         <button className="bg-gray-300 px-2 py-1 rounded">+ Add Tag</button>
+      </div>
+
+      {/* Completed */}
+      <div className="flex items-center mb-4">
+        <input
+          type="checkbox"
+          name="completed"
+          checked={editedTask.completed}
+          onChange={handleChange}
+          className="form-checkbox h-5 w-5 text-blue-600"
+        />
+        <span className="ml-2">Completed</span>
       </div>
 
       {/* Action Buttons */}
